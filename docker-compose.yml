@@ -1,0 +1,31 @@
+version: "3.7"
+
+networks:
+  hnnet:
+
+services:
+  postgres:
+    container_name: hn_postgres
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 123456
+    restart: unless-stopped
+    networks:
+      hnnet:
+  app:
+    build: .
+    container_name: hn_app
+    ports:
+      - 8080:80
+    environment:
+        DB_TYPE: postgresql
+        DB_USER: postgres
+        DB_PASSWORD: 123456
+        DB_HOST: hn_postgres
+        DB_PORT: 5432
+        DB_NAME: postgres
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    networks:
+      hnnet:
