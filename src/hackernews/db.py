@@ -1,3 +1,4 @@
+import aiopg.sa
 from sqlalchemy import create_engine, MetaData, select
 
 from . import (config, logger)
@@ -35,3 +36,13 @@ def create_posts(connect, posts):
 
     logger.info(
         f'Inserted posts: {posts_inserted} | Skipped posts: {posts_skipped}')
+
+
+async def init_db(app):
+    engine = await aiopg.sa.create_engine(DSN)
+    app['db'] = engine
+
+
+async def close_db(app):
+    app['db'].close()
+    await app['db'].wait_closed()
