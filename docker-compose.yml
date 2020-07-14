@@ -1,5 +1,7 @@
-# clear:
+#   clear containers:
 # docker rm $(docker ps -qa --no-trunc --filter "name=hn_" --filter "status=exited")
+#   open psql:
+# docker exec -it hn_postgres psql -U postgres -W
 
 version: "3.7"
 
