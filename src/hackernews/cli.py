@@ -5,8 +5,9 @@ import click
 from aiohttp import web
 
 from .app import get_app
-from .db import get_engine, create_tables
 from .helpers.sync import sync
+from .parsers import parse_topstories
+from .db import get_engine, create_tables
 
 
 logging.basicConfig(
@@ -39,3 +40,8 @@ def init():
     engine = get_engine()
     create_tables(engine)
     logger.info('Tables created successfully')
+
+
+@cli.command()
+def parse():
+    print(parse_topstories())

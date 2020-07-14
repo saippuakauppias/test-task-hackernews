@@ -2,3 +2,4 @@ aiohttp==3.6.2
 click==7.1.2
 aiopg[sa]==1.0.0
 simple-settings==0.19.1
+requests==2.24.0
