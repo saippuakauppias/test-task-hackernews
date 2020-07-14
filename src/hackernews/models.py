@@ -9,6 +9,7 @@ Post = Table(
     meta,
 
     Column('id', Integer, primary_key=True),
+    Column('post_id', String(10), nullable=False, unique=True),
     Column('title', String(512), nullable=False),
     Column('url', String(256), nullable=False),
     Column('created_at', DateTime, nullable=False,

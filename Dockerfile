@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt
 COPY . /app
 RUN pip install -e .
 
-CMD hackernews init && hackernews serve --port 80 --host 0.0.0.0
+CMD sleep 3 && hackernews init && hackernews parse && hackernews serve --port 80 --host 0.0.0.0

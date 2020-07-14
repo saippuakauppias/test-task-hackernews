@@ -1,11 +1,9 @@
 import re
 import sys
-import logging
 
 import requests
 
-
-logger = logging.getLogger(__name__)
+from . import logger
 
 
 def parse_topstories():
@@ -37,7 +35,7 @@ def parse_topstories():
         r'</a>'
     )
 
-    result = []
+    result = dict()
 
     for post_match in RE_POSTS.finditer(r.text):
         post_data = RE_POST_DATA.search(post_match.group('body'))
@@ -45,10 +43,12 @@ def parse_topstories():
             logger.error('Parse post data failed', post_match)
             sys.exit(1)
 
-        result.append({
-            'id': post_match.group('id'),
-            'url': post_data.group('url'),
-            'title': post_data.group('title')
+        result.update({
+            post_match.group('id'): {
+                'post_id': post_match.group('id'),
+                'url': post_data.group('url'),
+                'title': post_data.group('title')
+            }
         })
 
     if not result:

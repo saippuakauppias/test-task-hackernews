@@ -1,20 +1,13 @@
 import asyncio
-import logging
 
 import click
 from aiohttp import web
 
+from . import logger
 from .app import get_app
 from .helpers.sync import sync
 from .parsers import parse_topstories
-from .db import get_engine, create_tables
-
-
-logging.basicConfig(
-    level=logging.INFO,
-    format='[%(levelname)s] %(asctime)s - %(name)s  - %(message)s',
-)
-logger = logging.getLogger(__name__)
+from .db import get_engine, create_tables, create_posts
 
 
 @click.group()
@@ -44,4 +37,11 @@ def init():
 
 @cli.command()
 def parse():
-    print(parse_topstories())
+    posts = parse_topstories()
+
+    engine = get_engine()
+    conn = engine.connect()
+    try:
+        create_posts(conn, posts)
+    finally:
+        conn.close()
