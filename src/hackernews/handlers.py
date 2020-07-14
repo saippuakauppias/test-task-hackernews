@@ -8,10 +8,11 @@ from .validators import  (validate_int, validate_order_field,
 
 async def posts(request):
     limit = request.query.get('limit', 5)
-    limit = validate_int(limit, 'wrong value in limit param')
+    limit = validate_int(limit, 'wrong value in limit param', max_value=100)
 
     offset = request.query.get('offset', 0)
-    offset = validate_int(offset, 'wrong value in offset param', False)
+    offset = validate_int(offset, 'wrong value in offset param',
+                          disallow_zero=False)
 
     order_field = request.query.get('order', None)
     order_field = validate_order_field(order_field)

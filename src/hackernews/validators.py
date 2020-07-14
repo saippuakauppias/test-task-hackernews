@@ -2,11 +2,12 @@ from .models import Post
 from .exceptions import HTTPBadRequestJSON
 
 
-def validate_int(param, error_text, disallow_zero=True):
+def validate_int(param, error_text, max_value=None, disallow_zero=True):
     try:
         param = int(param)
         param = max(0, param)
-        param = min(param, 100)
+        if max_value is not None:
+            param = min(param, max_value)
         if disallow_zero and not param:
             raise ValueError()
     except ValueError:
