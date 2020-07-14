@@ -11,3 +11,7 @@ class HTTPBadRequestJSON(HTTPBadRequest):
                          text=text, content_type=content_type)
         self.text = json_dumps({'error': text})
         self.content_type = 'application/json'
+
+
+class ParseError(RuntimeError):
+    pass

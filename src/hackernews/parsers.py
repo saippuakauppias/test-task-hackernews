@@ -1,9 +1,9 @@
 import re
-import sys
 
 import requests
 
 from . import logger
+from .exceptions import ParseError
 
 
 def parse_topstories():
@@ -15,13 +15,11 @@ def parse_topstories():
     try:
         r = requests.get('https://news.ycombinator.com/')
     except requests.RequestException as e:
-        logger.error('Page load failed')
-        raise
+        raise ParseError('Page load failed', e)
 
     # page is fully loaded?
     if '</html>' not in r.text:
-        logger.error('Page not fully loaded')
-        sys.exit(1)
+        raise ParseError('Page not fully loaded')
 
     RE_POSTS = re.compile(
         r'<tr[^>]+id=[\'"]{0,1}(?P<id>\d+)[\'"]{0,1}[^>]>' + \
@@ -40,8 +38,7 @@ def parse_topstories():
     for post_match in RE_POSTS.finditer(r.text):
         post_data = RE_POST_DATA.search(post_match.group('body'))
         if not post_data:
-            logger.error('Parse post data failed', post_match)
-            sys.exit(1)
+            raise ParseError('Parse post data failed', post_match)
 
         result.update({
             post_match.group('id'): {
@@ -52,7 +49,6 @@ def parse_topstories():
         })
 
     if not result:
-        logger.error('Posts empty')
-        sys.exit(1)
+        raise ParseError('Posts empty')
 
     return result
