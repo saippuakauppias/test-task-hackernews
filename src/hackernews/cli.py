@@ -4,16 +4,16 @@ import logging
 import click
 from aiohttp import web
 
-from hackernews.app import get_app
-from hackernews.db import get_engine, create_tables
-from hackernews.helpers.sync import sync
+from .app import get_app
+from .db import get_engine, create_tables
+from .helpers.sync import sync
 
 
 logging.basicConfig(
     level=logging.INFO,
     format='[%(levelname)s] %(asctime)s - %(name)s  - %(message)s',
 )
-logger = logging.getLogger('__name__')
+logger = logging.getLogger(__name__)
 
 
 @click.group()

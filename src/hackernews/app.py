@@ -1,6 +1,6 @@
 from aiohttp import web
 
-from hackernews.routes import routes
+from .routes import routes
 
 
 async def get_app():

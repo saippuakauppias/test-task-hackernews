@@ -4,8 +4,8 @@ from sqlalchemy import (MetaData, Table, Column, Integer, String, DateTime, text
 meta = MetaData()
 
 
-item = Table(
-    'item',
+Post = Table(
+    'post',
     meta,
 
     Column('id', Integer, primary_key=True),
