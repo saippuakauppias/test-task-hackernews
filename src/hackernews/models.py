@@ -12,6 +12,6 @@ Post = Table(
     Column('post_id', String(10), nullable=False, unique=True),
     Column('title', String(512), nullable=False),
     Column('url', String(256), nullable=False),
-    Column('created_at', DateTime, nullable=False,
+    Column('created', DateTime, nullable=False,
            server_default=text('NOW()'))
 )
