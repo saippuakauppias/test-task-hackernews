@@ -23,12 +23,12 @@ services:
     ports:
       - 8080:80
     environment:
-        DB_TYPE: postgresql
-        DB_USER: postgres
-        DB_PASSWORD: 123456
-        DB_HOST: hn_postgres
-        DB_PORT: 5432
-        DB_NAME: postgres
+      DB_TYPE: postgresql
+      DB_USER: postgres
+      DB_PASSWORD: 123456
+      DB_HOST: hn_postgres
+      DB_PORT: 5432
+      DB_NAME: postgres
     restart: unless-stopped
     depends_on:
       - postgres
