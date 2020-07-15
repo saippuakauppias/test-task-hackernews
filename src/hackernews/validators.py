@@ -23,13 +23,14 @@ def validate_order_field(order_field):
         'url': Post.c.url
     }
 
-    order_field_keys = order_mapping.keys()
-    if order_field not in order_field_keys:
-        order_field_keys = ','.join(order_field_keys)
-        raise HTTPBadRequestJSON(
-            text=f'order param accept only: {order_field_keys}')
-    else:
-        order_field = order_mapping[order_field]
+    if order_field:
+        order_field_keys = order_mapping.keys()
+        if order_field not in order_field_keys:
+            order_field_keys = ','.join(order_field_keys)
+            raise HTTPBadRequestJSON(
+                text=f'order param accept only: {order_field_keys}')
+        else:
+            order_field = order_mapping[order_field]
 
     return order_field
 
