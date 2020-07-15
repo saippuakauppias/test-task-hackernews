@@ -3,4 +3,7 @@ click==7.1.2
 aiopg[sa]==1.0.0
 simple-settings==0.19.1
 requests==2.24.0
+
+# TODO: dev?
 pytest==5.4.3
+requests-mock==1.8.0
