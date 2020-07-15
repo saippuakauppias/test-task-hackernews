@@ -1,4 +1,5 @@
-from sqlalchemy import (MetaData, Table, Column, Integer, String, DateTime, text)
+from sqlalchemy import (MetaData, Table, Column, Integer, String, DateTime,
+                        text)
 
 
 meta = MetaData()

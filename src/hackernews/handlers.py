@@ -2,8 +2,8 @@ from aiohttp import web
 
 from .models import Post
 from .utils import json_dumps
-from .validators import  (validate_int, validate_order_field,
-                          validate_order_type)
+from .validators import (validate_int, validate_order_field,
+                         validate_order_type)
 
 
 async def posts(request):

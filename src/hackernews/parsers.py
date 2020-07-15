@@ -2,7 +2,6 @@ import re
 
 import requests
 
-from . import logger
 from .exceptions import ParseError
 
 
@@ -22,14 +21,14 @@ def parse_topstories():
         raise ParseError('Page not fully loaded')
 
     RE_POSTS = re.compile(
-        r'<tr[^>]+id=[\'"]{0,1}(?P<id>\d+)[\'"]{0,1}[^>]>' + \
-        r'(?P<body>[\w\W]+?)'+ \
+        r'<tr[^>]+id=[\'"]{0,1}(?P<id>\d+)[\'"]{0,1}[^>]>' +
+        r'(?P<body>[\w\W]+?)' +
         r'</tr>'
     )
     RE_POST_DATA = re.compile(
-        r'<a[^>]+href=["\']{1}(?P<url>[^"\']+)["\']{1}[^>]+' + \
-        r'storylink["\']{1}[^>]*>' + \
-        r'(?P<title>[^<]+)' + \
+        r'<a[^>]+href=["\']{1}(?P<url>[^"\']+)["\']{1}[^>]+' +
+        r'storylink["\']{1}[^>]*>' +
+        r'(?P<title>[^<]+)' +
         r'</a>'
     )
 
