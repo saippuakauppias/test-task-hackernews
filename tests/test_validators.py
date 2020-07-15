@@ -21,8 +21,8 @@ def test_validate_order_field():
     assert validate_order_field('id') == Post.c.id
     assert validate_order_field('title') == Post.c.title
     assert validate_order_field('url') == Post.c.url
+    assert validate_order_field(None) == None
     with pytest.raises(HTTPBadRequestJSON):
-        validate_order_field(None)
         validate_order_field('not_exists')
 
 
